@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BusinessObject.Models.OrderDetail>
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Order @ViewData["OrderId"]</h1>
+<h3>OrderDetails</h3>
+@if (Context.Session.GetString("role") == "Admin")
+{
+    <p>
+        <a asp-action="Create" asp-route-id="@ViewData["OrderId"]">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { orderId = item.OrderId, productId = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderId, productId = item.ProductId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrderId, productId = item.ProductId })
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

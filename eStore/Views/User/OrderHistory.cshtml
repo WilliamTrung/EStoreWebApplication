@@ -1,0 +1,60 @@
+﻿
+@{
+}
+@model IEnumerable<BusinessObject.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>View History Order</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Freight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Freight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.City)
+                </td>
+                <td>
+                    <a asp-controller="User" asp-action="OrderDetails" asp-route-id="@item.OrderId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
